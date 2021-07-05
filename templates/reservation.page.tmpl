@@ -1,0 +1,41 @@
+{{template "base" .}}
+
+{{define "content"}}
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center mt-5">Search For Availability</h1>
+            <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the
+                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+                scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap
+                into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
+                release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing
+                software like Aldus PageMaker including versions of Lorem Ipsum.</p>
+        </div>
+
+        <form action="/make-reservation" method="post">
+
+            <div class="row m-auto">
+                <div class="col-md-3"></div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="start_date" class="form-label">Starting Date</label>
+                        <input type="date" class="form-control" id="start_date" name="start_date"
+                               aria-describedby="startDateHelp" required>
+                        <div id="startDateHelp" class="form-text">Enter you start date</div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="mb-3">
+                        <label for="end_date" class="form-label">Starting Date</label>
+                        <input type="date" class="form-control" id="end_date" name="end_date"
+                               aria-describedby="endDateHelp" required>
+                        <div id="endDateHelp" class="form-text">Enter you end date</div>
+                    </div>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary">Search Availability</button>
+        </form>
+    </div>
+{{end}}
+
+

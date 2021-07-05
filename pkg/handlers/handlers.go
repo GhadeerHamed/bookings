@@ -7,7 +7,6 @@ import (
 	"net/http"
 )
 
-
 // Repo the repository used by handlers
 var Repo *Repository
 
@@ -45,7 +44,27 @@ func (m *Repository) About(w http.ResponseWriter, r *http.Request) {
 	//How to get the session in handlers
 	//m.App.Session
 
-	render.RenderTemplate(w, "about.page.tmpl",  &models.TemplateData{
+	render.RenderTemplate(w, "about.page.tmpl", &models.TemplateData{
 		StringMap: stringMap,
 	})
+}
+
+func (m *Repository) GeneralRoom(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "general-room.page.tmpl", &models.TemplateData{})
+}
+
+func (m *Repository) MajorRoom(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "major-room.page.tmpl", &models.TemplateData{})
+}
+
+func (m *Repository) Contact(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "contact.page.tmpl", &models.TemplateData{})
+}
+
+func (m *Repository) MakeReservation(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "reservation.page.tmpl", &models.TemplateData{})
+}
+
+func (m *Repository) MakeReservationForm(w http.ResponseWriter, r *http.Request) {
+	render.RenderTemplate(w, "make-reservation.page.tmpl", &models.TemplateData{})
 }
