@@ -1,5 +1,5 @@
 // Example starter JavaScript for disabling form submissions if there are invalid fields
-(function () {
+function applyValidateForm() {
     'use strict'
 
     // Fetch all the forms we want to apply custom Bootstrap validation styles to
@@ -17,12 +17,8 @@
                 form.classList.add('was-validated')
             }, false)
         })
-})()
+}
 
-const elem = document.getElementById('reservation-date');
-const rangepicker = new DateRangePicker(elem, {
-    format: "yyyy-mm-dd"
-});
 
 function notify(msg, type) {
     notie.alert({
@@ -41,7 +37,7 @@ function notifyModal(title, text, icon, confirmButtonText) {
     })
 }
 
-let attention = function () {
+function attention() {
     let toast = function (c) {
         const {
             msg = "",
@@ -140,25 +136,25 @@ let attention = function () {
 }
 
 // Test
-
-document.getElementById("test_btn").addEventListener("click", function () {
-    let html = `
-        <form id=="check-availability-form" action="" method="post" novalidate class="needs-validation">
-            <div class="row">
-                <div class="col">
-                    <div class="row" id="reservation-dates-modal">
-                        <div class="col">
-                            <input disabled autocomplete="off" required class="form-control" name="start" id="start" placeholder="Arrival" type="text" >
-                        </div>
-                        <div class="col">
-                            <input disabled autocomplete="off" required class="form-control" name="end" id="end" placeholder="Departure" type="text" >
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form> 
-    `
-
-
-    attention().custom({msg: html}).then(undefined)
-})
+//
+// document.getElementById("test_btn").addEventListener("click", function () {
+//     let html = `
+//         <form id=="check-availability-form" action="" method="post" novalidate class="needs-validation">
+//             <div class="row">
+//                 <div class="col">
+//                     <div class="row" id="reservation-dates-modal">
+//                         <div class="col">
+//                             <input disabled autocomplete="off" required class="form-control" name="start" id="start" placeholder="Arrival" type="text" >
+//                         </div>
+//                         <div class="col">
+//                             <input disabled autocomplete="off" required class="form-control" name="end" id="end" placeholder="Departure" type="text" >
+//                         </div>
+//                     </div>
+//                 </div>
+//             </div>
+//         </form>
+//     `
+//
+//
+//     attention().custom({msg: html}).then(undefined)
+// })
