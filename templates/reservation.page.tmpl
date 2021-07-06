@@ -12,30 +12,25 @@
                 software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         </div>
 
-        <form action="/make-reservation" method="post">
-
-            <div class="row m-auto">
+        <form action="/make-reservation" class="needs-validation" novalidate method="post">
+            <div class="row">
                 <div class="col-md-3"></div>
-                <div class="col-md-3">
-                    <div class="mb-3">
-                        <label for="start_date" class="form-label">Starting Date</label>
-                        <input type="date" class="form-control" id="start_date" name="start_date"
-                               aria-describedby="startDateHelp" required>
-                        <div id="startDateHelp" class="form-text">Enter you start date</div>
-                    </div>
-                </div>
-                <div class="col-md-3">
-                    <div class="mb-3">
-                        <label for="end_date" class="form-label">Starting Date</label>
-                        <input type="date" class="form-control" id="end_date" name="end_date"
-                               aria-describedby="endDateHelp" required>
-                        <div id="endDateHelp" class="form-text">Enter you end date</div>
+                <div class="col">
+                    <div id="reservation-date" class="row">
+                        <div class="col-md-3">
+                            <input required class="form-control" type="text" name="start" placeholder="Arrival">
+                        </div>
+                        <div class="col-md-3">
+                            <input required class="form-control" type="text" name="end" placeholder="Departure">
+                        </div>
                     </div>
                 </div>
             </div>
+            <hr>
             <button type="submit" class="btn btn-primary">Search Availability</button>
         </form>
     </div>
-{{end}}
+    <button type="button" class="btn btn-info" id="test_btn">Test</button>
 
+{{end}}
 
