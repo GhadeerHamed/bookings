@@ -94,36 +94,45 @@ function attention() {
     let custom = async function (c) {
         const {
             title = "",
-            msg = ""
+            msg = "",
         } = c;
 
-        const {value: formValues} = await Swal.fire({
+        const {value: result} = await Swal.fire({
             title: title,
             html: msg,
             backdrop: false,
             focusConfirm: false,
             showCancelButton: true,
-            willOpen: (toast) => {
-                const elem = document.getElementById("reservation-dates-modal")
-                const rp = new DateRangePicker(elem, {
-                    format: "yyyy-mm-dd",
-                    showOnFocus: true
-                });
+            willOpen: () => {
+                if (c.willOpen !== undefined){
+                    c.willOpen()
+                }
             },
-            didOpen: (toast) => {
-                document.getElementById("start").removeAttribute('disabled')
-                document.getElementById("end").removeAttribute('disabled')
+            didOpen: () => {
+                if (c.didOpen !== undefined){
+                    c.didOpen()
+                }
             },
             preConfirm: () => {
-                return [
-                    document.getElementById('start').value,
-                    document.getElementById('end').value
-                ]
+                // return [
+                //     document.getElementById('start').value,
+                //     document.getElementById('end').value
+                // ]
             }
         })
 
-        if (formValues) {
-            Swal.fire(JSON.stringify(formValues))
+        if (result) {
+            if (result.dismiss !== Swal.DismissReason.cancel){
+                if (result.value !== ""){
+                    if (c.callback !== undefined){
+                        c.callback(result)
+                    }
+                }else{
+                    c.callback(false)
+                }
+            }else {
+                c.callback(false)
+            }
         }
     }
 

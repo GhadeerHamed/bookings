@@ -36,7 +36,7 @@
     <script>
         document.getElementById("check-availability-btn").addEventListener("click", function () {
             let html = `
-        <form id=="check-availability-form" action="" method="post" novalidate class="needs-validation">
+        <form id="check-availability-form" action="" method="post" novalidate class="needs-validation">
             <div class="row">
                 <div class="col">
                     <div class="row" id="reservation-dates-modal">
@@ -53,7 +53,36 @@
     `
 
 
-            attention().custom({msg: html}).then(undefined)
+            attention().custom({
+                msg: html,
+                title: "Choose your dates",
+                willOpen: (toast) => {
+                    const elem = document.getElementById("reservation-dates-modal")
+                    const rp = new DateRangePicker(elem, {
+                        format: "yyyy-mm-dd",
+                        showOnFocus: true
+                    });
+                },
+
+                didOpen: () => {
+                    document.getElementById("start").removeAttribute('disabled')
+                    document.getElementById("end").removeAttribute('disabled')
+                },
+
+                callback: function (r) {
+                    let form = document.getElementById("check-availability-form")
+                    let formData = new FormData(form)
+                    formData.append('csrf_token', "{{.CSRFToken}}")
+                    fetch("/search-availability-json", {
+                        method: "post",
+                        body: formData
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log("data", data.ok, data.message)
+                        })
+                }
+            }).then(undefined)
         })
     </script>
 {{end}}

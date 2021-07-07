@@ -12,7 +12,8 @@
                 software like Aldus PageMaker including versions of Lorem Ipsum.</p>
         </div>
 
-        <form action="" class="needs-validation" novalidate method="post">
+        <form action="/search-availability" class="needs-validation" novalidate method="post">
+            <input type="hidden" name="csrf_token" value="{{.CSRFToken}}">
             <div class="row">
                 <div class="col-md-3"></div>
                 <div class="col">
@@ -32,12 +33,12 @@
             <button type="submit" class="btn btn-primary">Search Availability</button>
         </form>
     </div>
-    <button type="button" class="btn btn-info" id="test_btn">Test</button>
 
 {{end}}
 
 {{define "js"}}
     <script>
+        applyValidateForm()
         const elem = document.getElementById('reservation-date');
         const rangepicker = new DateRangePicker(elem, {
             format: "yyyy-mm-dd"
