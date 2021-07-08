@@ -107,7 +107,15 @@
     <script src="/static/js/pkgs/datepicker-full.js"></script>
     <script src="/static/js/app.js"></script>
     <script>
-
+        {{with .Error}}
+        notify({{.}}, "error")
+        {{end}}
+        {{with .Flash}}
+        notify({{.}}, "success")
+        {{end}}
+        {{with .Warning}}
+        notify({{.}}, "warning")
+        {{end}}
     </script>
     {{block "js" .}}
     {{end}}

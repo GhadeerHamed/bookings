@@ -37,6 +37,8 @@ function notifyModal(title, text, icon, confirmButtonText) {
     })
 }
 
+
+
 function attention() {
     let toast = function (c) {
         const {
