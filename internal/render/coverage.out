@@ -1,0 +1,23 @@
+mode: set
+github.com/ghadeerhamed/bookings/internal/render/render.go:20.39,22.2 1 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:24.84,30.2 5 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:31.106,35.18 2 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:41.2,42.9 2 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:46.2,51.16 5 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:55.2,55.12 1 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:35.18,37.3 1 0
+github.com/ghadeerhamed/bookings/internal/render/render.go:37.8,39.3 1 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:42.9,44.3 1 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:51.16,54.3 2 0
+github.com/ghadeerhamed/bookings/internal/render/render.go:58.67,62.16 3 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:65.2,65.29 1 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:85.2,85.21 1 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:62.16,64.3 1 0
+github.com/ghadeerhamed/bookings/internal/render/render.go:65.29,68.17 3 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:72.3,73.17 2 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:76.3,76.23 1 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:82.3,82.21 1 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:68.17,70.4 1 0
+github.com/ghadeerhamed/bookings/internal/render/render.go:73.17,75.4 1 0
+github.com/ghadeerhamed/bookings/internal/render/render.go:76.23,78.18 2 1
+github.com/ghadeerhamed/bookings/internal/render/render.go:78.18,80.5 1 0
