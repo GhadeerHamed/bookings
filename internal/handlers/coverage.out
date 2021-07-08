@@ -1,0 +1,20 @@
+mode: set
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:22.47,26.2 1 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:29.33,31.2 1 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:33.67,37.2 3 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:39.68,54.2 5 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:56.74,58.2 1 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:60.72,62.2 1 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:64.70,66.2 1 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:68.75,70.2 1 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:72.79,76.2 3 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:78.74,86.2 4 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:89.78,91.16 2 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:96.2,109.19 6 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:120.2,121.66 2 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:91.16,94.3 2 0
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:109.19,118.3 4 0
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:124.81,126.9 2 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:132.2,139.4 4 0
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:126.9,130.3 3 1
+github.com/ghadeerhamed/bookings/internal/handlers/handlers.go:147.79,152.2 4 1
