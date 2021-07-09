@@ -2,12 +2,5 @@
 
 {{define "content"}}
     <h1>This is About page</h1>
-
-    <p>This came from template data : {{index .StringMap "test"}}</p>
-    {{if ne (index .StringMap "remote_ip")  ""}}
-        <p>Remote Ip : {{index .StringMap "remote_ip"}}</p>
-    {{else}}
-        <p>Remote Ip : Unknown yet</p>
-    {{end}}
 {{end}}
 

@@ -5,6 +5,7 @@ import (
 	"github.com/alexedwards/scs/v2"
 	"github.com/ghadeerhamed/bookings/internal/config"
 	"github.com/ghadeerhamed/bookings/internal/models"
+	"log"
 	"net/http"
 	"os"
 	"testing"
@@ -20,6 +21,9 @@ func TestMain(m *testing.M) {
 
 	//In Production Mode
 	testApp.InProduction = false
+
+	testApp.InfoLog = log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	testApp.ErrorLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
 
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
