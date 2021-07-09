@@ -1,0 +1,18 @@
+mode: set
+github.com/ghadeerhamed/bookings/internal/forms/errors.go:6.44,8.2 1 1
+github.com/ghadeerhamed/bookings/internal/forms/errors.go:11.42,14.18 2 1
+github.com/ghadeerhamed/bookings/internal/forms/errors.go:17.2,17.14 1 1
+github.com/ghadeerhamed/bookings/internal/forms/errors.go:14.18,16.3 1 1
+github.com/ghadeerhamed/bookings/internal/forms/forms.go:17.33,22.2 1 1
+github.com/ghadeerhamed/bookings/internal/forms/forms.go:25.39,27.13 2 1
+github.com/ghadeerhamed/bookings/internal/forms/forms.go:30.2,30.13 1 1
+github.com/ghadeerhamed/bookings/internal/forms/forms.go:27.13,29.3 1 1
+github.com/ghadeerhamed/bookings/internal/forms/forms.go:33.43,34.31 1 1
+github.com/ghadeerhamed/bookings/internal/forms/forms.go:34.31,36.37 2 1
+github.com/ghadeerhamed/bookings/internal/forms/forms.go:36.37,38.4 1 1
+github.com/ghadeerhamed/bookings/internal/forms/forms.go:42.57,44.25 2 1
+github.com/ghadeerhamed/bookings/internal/forms/forms.go:48.2,48.13 1 1
+github.com/ghadeerhamed/bookings/internal/forms/forms.go:44.25,47.3 2 1
+github.com/ghadeerhamed/bookings/internal/forms/forms.go:51.38,52.40 1 1
+github.com/ghadeerhamed/bookings/internal/forms/forms.go:52.40,54.3 1 1
+github.com/ghadeerhamed/bookings/internal/forms/forms.go:57.29,59.2 1 1
