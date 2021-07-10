@@ -1,14 +1,17 @@
 package main
 
 import (
+	"database/sql"
 	"encoding/gob"
 	"fmt"
 	"github.com/alexedwards/scs/v2"
 	"github.com/ghadeerhamed/bookings/internal/config"
+	"github.com/ghadeerhamed/bookings/internal/driver"
 	"github.com/ghadeerhamed/bookings/internal/handlers"
 	"github.com/ghadeerhamed/bookings/internal/helpers"
 	"github.com/ghadeerhamed/bookings/internal/models"
 	"github.com/ghadeerhamed/bookings/internal/render"
+	"html/template"
 	"log"
 	"net/http"
 	"os"
@@ -23,10 +26,18 @@ var infoLog *log.Logger
 var errorLog *log.Logger
 
 func main() {
-	err := run()
+	db, err := run()
 	if err != nil {
 		log.Fatal(err)
 	}
+
+	//Close connection after app finish
+	defer func(SQL *sql.DB) {
+		err := SQL.Close()
+		if err != nil {
+			_ = fmt.Errorf("error Disconnecting with database [%v]", err)
+		}
+	}(db.SQL)
 
 	fmt.Printf("App started on: %v\n\n", addr)
 
@@ -39,7 +50,7 @@ func main() {
 	log.Fatal(err)
 }
 
-func run() error {
+func run() (*driver.DB, error) {
 	//What I am going to put in the session
 	gob.Register(models.Reservation{})
 
@@ -60,18 +71,26 @@ func run() error {
 
 	app.Session = session
 
-	tc, err := render.CreateTemplateCache()
+	//Connect to database
+	log.Println("Connecting to database...")
+	db, err := driver.ConnectSQL("host=localhost port=5432 dbname=bookings user=postgres password=root")
+	if err != nil {
+		log.Fatal("Connot connect to database!. Dying ", err)
+	}
+	log.Println("Connected to database!")
+
+	var tc map[string]*template.Template
+	tc, err = render.CreateTemplateCache()
 	if err != nil {
 		log.Fatal("Error Creating template cache: ", err)
-		return err
 	}
 	app.TemplateCache = tc
 	app.UseCache = false
 
-	repo := handlers.NewRepo(&app)
+	repo := handlers.NewRepo(&app, db)
 	handlers.NewHandlers(repo)
 	render.NewTemplate(&app)
 	helpers.NewHelpers(&app)
 
-	return nil
+	return db, nil
 }
