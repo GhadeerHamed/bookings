@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"encoding/json"
+	"errors"
 	"github.com/ghadeerhamed/bookings/internal/config"
 	"github.com/ghadeerhamed/bookings/internal/driver"
 	"github.com/ghadeerhamed/bookings/internal/forms"
@@ -10,6 +11,7 @@ import (
 	"github.com/ghadeerhamed/bookings/internal/render"
 	"github.com/ghadeerhamed/bookings/internal/repository"
 	"github.com/ghadeerhamed/bookings/internal/repository/dbrepo"
+	"github.com/go-chi/chi/v5"
 	"net/http"
 	"strconv"
 	"time"
@@ -203,7 +205,7 @@ func (m *Repository) PostAvailability(w http.ResponseWriter, r *http.Request) {
 	if len(rooms) == 0 {
 		//no availability
 		m.App.Session.Put(r.Context(), "error", "No Availability")
-		http.Redirect(w, r, "search-availability", http.StatusSeeOther)
+		http.Redirect(w, r, "/search-availability", http.StatusSeeOther)
 		return
 	}
 
@@ -237,4 +239,24 @@ func (m *Repository) AvailabilityJSON(w http.ResponseWriter, r *http.Request) {
 
 	w.Header().Set("Content-Type", "application/json")
 	w.Write(out)
+}
+
+func (m *Repository) CooseRoom(w http.ResponseWriter, r *http.Request) {
+	roomID, err := strconv.Atoi(chi.URLParam(r, "id"))
+	if err != nil {
+		helpers.ServerError(w, err)
+		return
+	}
+
+	res, ok := m.App.Session.Get(r.Context(), "reservation").(models.Reservation)
+
+	if !ok {
+		helpers.ServerError(w, errors.New("couldn't get reservation from the session"))
+		return
+	}
+
+	res.RoomID = roomID
+	m.App.Session.Put(r.Context(), "reservation", res)
+
+	http.Redirect(w, r, "/make-reservation", http.StatusSeeOther)
 }
