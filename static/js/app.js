@@ -95,16 +95,20 @@ function attention() {
 
     let custom = async function (c) {
         const {
+            icon = "",
             title = "",
             msg = "",
+            showConfirmButton= true,
         } = c;
 
         const {value: result} = await Swal.fire({
+            icon: icon,
             title: title,
             html: msg,
             backdrop: false,
             focusConfirm: false,
             showCancelButton: true,
+            showConfirmButton: showConfirmButton,
             willOpen: () => {
                 if (c.willOpen !== undefined){
                     c.willOpen()

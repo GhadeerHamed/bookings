@@ -33,27 +33,9 @@
 
 
 {{define "js"}}
+    <script src="/static/js/rooms.js"></script>
     <script>
-        document.getElementById("check-availability-btn").addEventListener("click", function () {
-            let html = `
-        <form id=="check-availability-form" action="" method="post" novalidate class="needs-validation">
-            <div class="row">
-                <div class="col">
-                    <div class="row" id="reservation-dates-modal">
-                        <div class="col">
-                            <input disabled autocomplete="off" required class="form-control" name="start" id="start" placeholder="Arrival" type="text" >
-                        </div>
-                        <div class="col">
-                            <input disabled autocomplete="off" required class="form-control" name="end" id="end" placeholder="Departure" type="text" >
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </form>
-    `
-
-            attention().custom({msg: html}).then(undefined)
-        })
+        buildJSHandler("{{.CSRFToken}}", "2")
     </script>
 {{end}}
 
