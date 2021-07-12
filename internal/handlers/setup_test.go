@@ -21,19 +21,20 @@ import (
 
 var app config.AppConfig
 var session *scs.SessionManager
-
-var functions = template.FuncMap{}
 var pathToTemplates = "./../../templates"
+var functions = template.FuncMap{}
 
 func TestMain(m *testing.M) {
-	//What I am going to put in the session
 	gob.Register(models.Reservation{})
 
-	//In Production Mode
+	// change this to true when in production
 	app.InProduction = false
 
-	app.InfoLog = log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
-	app.ErrorLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	app.InfoLog = infoLog
+
+	errorLog := log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	app.ErrorLog = errorLog
 
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
@@ -45,8 +46,9 @@ func TestMain(m *testing.M) {
 
 	tc, err := CreateTestTemplateCache()
 	if err != nil {
-		log.Fatal("Error Creating template cache: ", err)
+		log.Fatal("cannot create template cache")
 	}
+
 	app.TemplateCache = tc
 	app.UseCache = true
 
@@ -58,7 +60,6 @@ func TestMain(m *testing.M) {
 }
 
 func getRoutes() http.Handler {
-
 	mux := chi.NewRouter()
 
 	mux.Use(middleware.Recoverer)
@@ -66,30 +67,30 @@ func getRoutes() http.Handler {
 	mux.Use(SessionLoad)
 
 	mux.Get("/", Repo.Home)
-	mux.Get("/rooms/generals-quarters", Repo.GeneralRoom)
-	mux.Get("/rooms/major-suit", Repo.MajorRoom)
+	mux.Get("/about", Repo.About)
+	mux.Get("/generals-quarters", Repo.Generals)
+	mux.Get("/majors-suite", Repo.Majors)
 
 	mux.Get("/search-availability", Repo.Availability)
 	mux.Post("/search-availability", Repo.PostAvailability)
+	mux.Post("/search-availability-json", Repo.AvailabilityJSON)
+
+	mux.Get("/contact", Repo.Contact)
 
 	mux.Get("/make-reservation", Repo.Reservation)
 	mux.Post("/make-reservation", Repo.PostReservation)
 	mux.Get("/reservation-summary", Repo.ReservationSummary)
 
-	mux.Get("/contact", Repo.Contact)
-	mux.Get("/about", Repo.About)
-
-	mux.Post("/search-availability-json", Repo.AvailabilityJSON)
-
 	fileServer := http.FileServer(http.Dir("./static/"))
 	mux.Handle("/static/*", http.StripPrefix("/static", fileServer))
-	return mux
 
+	return mux
 }
 
-//NoSurf add CSRF protection on POST requests
+// NoSurf adds CSRF protection to all POST requests
 func NoSurf(next http.Handler) http.Handler {
 	csrfHandler := nosurf.New(next)
+
 	csrfHandler.SetBaseCookie(http.Cookie{
 		HttpOnly: true,
 		Path:     "/",
@@ -99,18 +100,21 @@ func NoSurf(next http.Handler) http.Handler {
 	return csrfHandler
 }
 
-//SessionLoad loads and saves the session on every request
+// SessionLoad loads and saves the session on every request
 func SessionLoad(next http.Handler) http.Handler {
 	return session.LoadAndSave(next)
 }
 
+// CreateTestTemplateCache creates a template cache as a map
 func CreateTestTemplateCache() (map[string]*template.Template, error) {
+
 	myCache := map[string]*template.Template{}
 
 	pages, err := filepath.Glob(fmt.Sprintf("%s/*.page.tmpl", pathToTemplates))
 	if err != nil {
 		return myCache, err
 	}
+
 	for _, page := range pages {
 		name := filepath.Base(page)
 		ts, err := template.New(name).Funcs(functions).ParseFiles(page)
@@ -122,12 +126,14 @@ func CreateTestTemplateCache() (map[string]*template.Template, error) {
 		if err != nil {
 			return myCache, err
 		}
+
 		if len(matches) > 0 {
 			ts, err = ts.ParseGlob(fmt.Sprintf("%s/*.layout.tmpl", pathToTemplates))
 			if err != nil {
 				return myCache, err
 			}
 		}
+
 		myCache[name] = ts
 	}
 

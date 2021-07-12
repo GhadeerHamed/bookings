@@ -16,14 +16,18 @@ var session *scs.SessionManager
 var testApp config.AppConfig
 
 func TestMain(m *testing.M) {
-	//What I am going to put in the session
+
+	// what am I going to put in the session
 	gob.Register(models.Reservation{})
 
-	//In Production Mode
+	// change this to true when in production
 	testApp.InProduction = false
 
-	testApp.InfoLog = log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
-	testApp.ErrorLog = log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	infoLog := log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
+	testApp.InfoLog = infoLog
+
+	errorLog := log.New(os.Stdout, "ERROR\t", log.Ldate|log.Ltime|log.Lshortfile)
+	testApp.ErrorLog = errorLog
 
 	session = scs.New()
 	session.Lifetime = 24 * time.Hour
@@ -38,7 +42,6 @@ func TestMain(m *testing.M) {
 	os.Exit(m.Run())
 }
 
-//Implementing our response writer for tests
 type myWriter struct{}
 
 func (tw *myWriter) Header() http.Header {
@@ -46,7 +49,9 @@ func (tw *myWriter) Header() http.Header {
 	return h
 }
 
-func (tw *myWriter) WriteHeader(i int) {}
+func (tw *myWriter) WriteHeader(i int) {
+
+}
 
 func (tw *myWriter) Write(b []byte) (int, error) {
 	length := len(b)
